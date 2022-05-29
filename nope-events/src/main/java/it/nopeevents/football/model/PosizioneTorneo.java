@@ -20,10 +20,17 @@ public class PosizioneTorneo {
 	@OneToOne
 	private Squadra squadra;
 	
-	private Long punti;
+	private Integer punti;
 	
-	private Long differenzaReti;
+	private Integer differenzaReti;
 
+	public PosizioneTorneo(Torneo torneo, Squadra squadra) {
+		this.torneo = torneo;
+		this.squadra = squadra;
+		this.punti = 0;
+		this.differenzaReti = 0;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,19 +55,19 @@ public class PosizioneTorneo {
 		this.squadra = squadra;
 	}
 
-	public Long getPunti() {
+	public Integer getPunti() {
 		return punti;
 	}
 
-	public void setPunti(Long punti) {
+	public void setPunti(Integer punti) {
 		this.punti = punti;
 	}
 
-	public Long getDifferenzaReti() {
+	public Integer getDifferenzaReti() {
 		return differenzaReti;
 	}
 
-	public void setDifferenzaReti(Long differenzaReti) {
+	public void setDifferenzaReti(Integer differenzaReti) {
 		this.differenzaReti = differenzaReti;
 	}
 }
