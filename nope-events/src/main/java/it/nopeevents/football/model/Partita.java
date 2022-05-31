@@ -1,5 +1,6 @@
 package it.nopeevents.football.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +15,9 @@ public class Partita {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private Long giornata;
+	private Integer giornata;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST})
 	private Torneo torneo;
 	
 	@OneToOne
@@ -31,7 +32,7 @@ public class Partita {
 
 	private Long golTrasferta;
 	
-	public Partita(Long giornata, Torneo torneo, Squadra casa, Squadra ospite) {
+	public Partita(Integer giornata, Torneo torneo, Squadra casa, Squadra ospite) {
 		this.giornata = giornata;
 		this.torneo = torneo;
 		this.casa = casa;
@@ -51,11 +52,11 @@ public class Partita {
 		this.id = id;
 	}
 
-	public Long getGionata() {
+	public Integer getGiornata() {
 		return giornata;
 	}
 
-	public void setGionata(Long gionata) {
+	public void setGiornata(Integer gionata) {
 		this.giornata = gionata;
 	}
 
@@ -87,8 +88,10 @@ public class Partita {
 		return giocata;
 	}
 
-	public void setGiocata(boolean giocata) {
-		this.giocata = giocata;
+	public void setGiocata() {
+		this.giocata = true;
+				
+		this.getTorneo().registerPartita(this.getCasa(),this.getOspite(), this.getGolCasa(), this.getGolTrasferta());
 	}
 
 	public Long getGolCasa() {

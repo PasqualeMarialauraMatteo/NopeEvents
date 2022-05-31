@@ -2,7 +2,9 @@ package it.nopeevents.football.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,10 +34,10 @@ public class Torneo {
 	@ManyToMany
 	private List<Squadra> squadrePartecipanti;
 
-	@OneToMany(cascade = {CascadeType.PERSIST})
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Partita> partite;
 
-	@OneToMany(cascade = {CascadeType.PERSIST})
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<PosizioneTorneo> classifica;
 
 	public Torneo(String nome, List<Squadra> partecipanti) {
@@ -92,9 +94,6 @@ public class Torneo {
 
 	public void setSquadrePartecipanti(List<Squadra> partecipanti) {
 		this.squadrePartecipanti = partecipanti;
-
-//		for(Squadra s: partecipanti)
-//			s.addTorneo(this);
 	}
 
 	public List<Partita> getPartite() {
@@ -113,10 +112,6 @@ public class Torneo {
 		this.classifica = classifica;
 	}
 
-//	private void addPartita(Partita p) {
-//		this.getPartite().add(p);
-//	}
-
 	private void setCalendario() {
 		this.initializeClassifica();
 		this.generateCalendario();
@@ -129,6 +124,64 @@ public class Torneo {
 	}
 
 	private void generateCalendario() {
+		List<Squadra> squadre = new ArrayList<>();
+		squadre.addAll(this.getSquadrePartecipanti());
+		Collections.shuffle(squadre, new Random());
 		
-	}	
+		int numeroSquadre = squadre.size();
+
+		for(int giornata = 1; giornata < numeroSquadre; giornata++) {
+			this.generateOneRound(giornata,squadre);
+			
+			squadre.add(1,squadre.get(numeroSquadre-1));
+			squadre.remove(numeroSquadre);
+		}
+	}
+	
+	private void generateOneRound(int giornata, List<Squadra> squadre) {
+		int j, middle = squadre.size()/2;
+		int distanzaRitorno = squadre.size() - 1;
+		
+		List<Squadra> l1 = new ArrayList<>();
+		for(j = 0; j < middle; j++) l1.add(squadre.get(j));
+		
+		List<Squadra> l2 = new ArrayList<>();
+		for(j = squadre.size() - 1; j >= middle; j--) l2.add(squadre.get(j));
+		
+		for(j = 0; j < l1.size(); j++) {
+			Squadra s1, s2;
+			
+			if(giornata%2 == 1) {
+				s1 = l1.get(j);
+				s2 = l2.get(j);
+			}
+			else {
+				s1 = l2.get(j);
+				s2 = l1.get(j);
+			} 
+			
+			this.addPartita(giornata, s1, s2);
+			this.addPartita(giornata+distanzaRitorno, s2, s1);
+		}
+	}
+
+	private void addPartita(int giornata, Squadra s1, Squadra s2) {
+		this.getPartite().add(new Partita(giornata,this,s1,s2));		
+	}
+
+	public void registerPartita(Squadra casa, Squadra ospite, Long golCasa, Long golTrasferta) {
+		PosizioneTorneo posCasa = this.findPosizioneSquadra(casa);
+		PosizioneTorneo posOspt = this.findPosizioneSquadra(ospite);
+		
+		posCasa.registerEsito(golCasa,golTrasferta);
+		posOspt.registerEsito(golTrasferta,golCasa);
+	}
+	
+	private PosizioneTorneo findPosizioneSquadra(Squadra s) {
+		for(PosizioneTorneo pt: this.getClassifica()) {
+			if(pt.getSquadra().equals(s)) return pt;
+		}
+		
+		return null;
+	}
 }

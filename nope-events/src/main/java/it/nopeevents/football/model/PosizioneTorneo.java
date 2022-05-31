@@ -20,15 +20,18 @@ public class PosizioneTorneo {
 	@OneToOne
 	private Squadra squadra;
 	
-	private Integer punti;
+	private Long punti;
 	
-	private Integer differenzaReti;
+	private Long differenzaReti;
+	
+	private Long partiteGiocate;
 
 	public PosizioneTorneo(Torneo torneo, Squadra squadra) {
 		this.torneo = torneo;
 		this.squadra = squadra;
-		this.punti = 0;
-		this.differenzaReti = 0;
+		this.punti = (long)0;
+		this.differenzaReti = (long)0;
+		this.partiteGiocate = (long)0;
 	}
 	
 	public Long getId() {
@@ -55,19 +58,50 @@ public class PosizioneTorneo {
 		this.squadra = squadra;
 	}
 
-	public Integer getPunti() {
+	public Long getPunti() {
 		return punti;
 	}
 
-	public void setPunti(Integer punti) {
+	public void setPunti(Long punti) {
 		this.punti = punti;
 	}
 
-	public Integer getDifferenzaReti() {
+	public Long getDifferenzaReti() {
 		return differenzaReti;
 	}
 
-	public void setDifferenzaReti(Integer differenzaReti) {
+	public void setDifferenzaReti(Long differenzaReti) {
 		this.differenzaReti = differenzaReti;
+	}
+
+	public Long getPartiteGiocate() {
+		return partiteGiocate;
+	}
+
+	public void setPartiteGiocate(Long partiteGiocate) {
+		this.partiteGiocate = partiteGiocate;
+	}
+
+	public void registerEsito(Long golFatti, Long golSubiti) {
+		this.aggiornaDifferenzaReti(golFatti,golSubiti);
+		this.aggiornaPunti(golFatti,golSubiti);
+		this.partiteGiocate = this.partiteGiocate + 1;
+	}
+
+	private void aggiornaPunti(Long golFatti, Long golSubiti) {
+		long punti = 1;
+		
+		if(golFatti > golSubiti) punti = 3;
+		else if(golFatti < golSubiti) punti = 0;
+		
+		long nuoviPunti = this.getPunti() + punti;
+		this.setPunti(nuoviPunti);
+	}
+
+	private void aggiornaDifferenzaReti(Long golFatti, Long golSubiti) {
+		Long nuovaDifferenzaReti = this.getDifferenzaReti();
+		
+		nuovaDifferenzaReti += (golFatti - golSubiti);
+		this.setDifferenzaReti(nuovaDifferenzaReti);
 	}
 }

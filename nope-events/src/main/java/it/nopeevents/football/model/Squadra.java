@@ -59,4 +59,10 @@ public class Squadra {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Squadra s = (Squadra) obj;
+		return this.getId() == s.getId();
+	}
 }
