@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Torneo {
 
@@ -29,6 +31,7 @@ public class Torneo {
 
 	private Long montepremi;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInizio;
 
 	@ManyToMany

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<title>Inserimento torneo</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+					<li><a href="/default">HOME</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box">
+			<form th:action="@{/admin/torneoForm}" method="post" th:object="${torneo}">
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore globale</p>
+				</div>
+				<div>
+					nome: <input type="text" th:field="*{nome}" />
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+				</div>
+				<div>
+					descrizione: <input type="text" th:field="*{descrizione}" />
+					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
+				</div>
+				<div>
+					montepremi: <input type="text" th:field="*{montepremi}" />
+					<div th:if="${#fields.hasErrors('montepremi')}" th:errors="*{montepremi}"></div>
+				</div>
+				<div>
+					data di inizio: <input type="date" th:value="*{dataInizio}" th:field="*{dataInizio}"/>
+					<div th:if="${#fields.hasErrors('dataInizio')}" th:errors="*{dataInizio}"></div>
+				</div>
+				da sistemare iserimento
+				<div>
+					<button type="submit" >
+					Conferma
+					</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
+</body>
+</html>

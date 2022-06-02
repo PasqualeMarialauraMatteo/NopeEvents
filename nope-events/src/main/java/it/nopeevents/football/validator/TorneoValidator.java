@@ -1,12 +1,14 @@
 package it.nopeevents.football.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.nopeevents.football.model.Torneo;
 import it.nopeevents.football.service.TorneoService;
 
+@Component
 public class TorneoValidator implements Validator {
 	@Autowired
 	private TorneoService torneoService;
