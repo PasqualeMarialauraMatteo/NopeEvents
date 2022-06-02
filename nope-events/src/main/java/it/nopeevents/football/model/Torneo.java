@@ -48,6 +48,10 @@ public class Torneo {
 		this.setCalendario();
 	}
 
+	public Torneo() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}
