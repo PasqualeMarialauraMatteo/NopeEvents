@@ -94,6 +94,17 @@ nav img{
 	margin: 2px;
 }
 
+.text-box-2 {
+	color:white;
+	padding: 1em;
+	padding-left: 3em;
+	font-size: 1.5em;
+}
+
+.text-box-2 p{
+	color: white;
+}
+
 .about-us{
 	min-height: 100vh;
 	width: 100%;

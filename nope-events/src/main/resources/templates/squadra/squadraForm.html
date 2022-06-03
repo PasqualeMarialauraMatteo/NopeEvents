@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<title>Iscrizione Squadra</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+					<li><a href="/admin">HOME</a></li>
+					
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box">
+		<h3>Iscrivi una squadra:</h3>
+			<div class="form-box">
+				<form th:action="@{/admin/squadraForm}" method="post" th:object="${squadra}">
+					<div th:if="${#fields.hasGlobalErrors()}">
+						<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore
+							globale</p>
+					</div>
+					<div>
+						Nome: <input type="text" th:field="*{nome}" />
+						<div>
+							<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+						</div>
+					</div>
+					<div>
+						Telefono: <input type="text" th:field="*{telefono}" />
+						<div>
+							<span th:if="${#fields.hasErrors('telefono')}"
+								th:errors="*{telefono}"></span>
+						</div>
+					</div>
+					<div>
+						Email:<input type="text" th:field="*{email}" />
+						<div>
+							<span th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></span>
+						</div>
+						<div>
+							<span th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></span>
+						</div>
+					</div>
+					<div>
+						Tornei:
+						<th:block th:each="torneo : ${listTornei} ">
+							<input type="checkbox" th:field="*{tornei}"
+								th:text="${torneo.nome}" th:value="${torneo.id}">
+						</th:block>
+						<div>
+							<span th:if="${#fields.hasErrors('tornei')}"
+								th:errors="*{tornei}"></span>
+						</div>
+					</div>
+					<div>
+						<button type="submit" />
+						Conferma
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</section>
+	<!-- - Footer - -->
+
+		<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
+
+
+
+
+</body>
+
+</html>

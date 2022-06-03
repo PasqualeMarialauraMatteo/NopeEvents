@@ -45,4 +45,10 @@ public class TorneoController {
 		return "torneo/torneoForm.html";
 	}
 	
+	@GetMapping("/tornei")
+	public String showTornei(Model model) {
+		model.addAttribute("tornei", torneoService.findAll());
+		return "torneo/tornei.html";
+	}
+	
 }

@@ -17,4 +17,5 @@ public class PartitaService {
 	public void save(Partita partita) {
 		partitaRepository.save(partita);
 	}
+
 }

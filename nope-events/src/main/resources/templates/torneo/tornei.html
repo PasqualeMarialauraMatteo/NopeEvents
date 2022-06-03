@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<title>Home</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+					<li><a href="/">HOME</a></li>
+					<li><a href="/default">TORNEI</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box-2">
+			<h4>I nostri Tornei</h4>
+			<ul>
+				<li th:each="torneo : ${tornei}">
+					<p
+						th:text="${torneo.nome} + '. ' + ${torneo.descrizione} + 
+								'. Montepremi: ' + ${torneo.montepremi} + ' euro.'">
+						Torneo</p>
+					<p>Squadre partecipanti:</p> 
+					<ul th:each="squadra : ${torneo.squadrePartecipanti}"> 
+					<li th:text="${squadra.nome}">Squadra</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
+</body>
+</html>
