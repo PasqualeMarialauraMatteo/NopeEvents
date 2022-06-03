@@ -1,9 +1,12 @@
 package it.nopeevents.football.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -19,6 +22,9 @@ public class Squadra {
 	private String telefono;
 	
 	private String email;
+	
+	@ManyToMany
+	private List<Torneo> tornei;
 	
 	public Squadra(String nome) {
 		this.nome = nome;
@@ -60,6 +66,15 @@ public class Squadra {
 		this.email = email;
 	}
 	
+	
+	public List<Torneo> getTornei() {
+		return tornei;
+	}
+
+	public void setTornei(List<Torneo> tornei) {
+		this.tornei = tornei;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		Squadra s = (Squadra) obj;
