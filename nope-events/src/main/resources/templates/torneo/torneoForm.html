@@ -15,7 +15,7 @@
 			<img src="../images/logoNE.png">
 			<div class="nav-links">
 				<ul>
-					<li><a href="/default">HOME</a></li>
+					<li><a href="/admin">HOME</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -40,7 +40,6 @@
 					data di inizio: <input type="date" th:value="*{dataInizio}" th:field="*{dataInizio}"/>
 					<div th:if="${#fields.hasErrors('dataInizio')}" th:errors="*{dataInizio}"></div>
 				</div>
-				da sistemare iserimento
 				<div>
 					<button type="submit" >
 					Conferma
