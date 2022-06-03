@@ -28,12 +28,12 @@ public class NopeEventsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Squadra A = new Squadra("A");
-		Squadra B = new Squadra("B");
-		Squadra C = new Squadra("C");
-		Squadra D = new Squadra("D");
-		Squadra E = new Squadra("E");
-		Squadra F = new Squadra("F");
+		Squadra A = new Squadra("AC Belluno");
+		Squadra B = new Squadra("Bolognesi FC");
+		Squadra C = new Squadra("Calvoirada");
+		Squadra D = new Squadra("Dominiosi");
+		Squadra E = new Squadra("Elefanti");
+		Squadra F = new Squadra("Ferentina");
 		
 		sS.save(A);
 		sS.save(B);
@@ -49,6 +49,8 @@ public class NopeEventsApplication implements CommandLineRunner {
 		partecipanti.add(D);
 				
 		Torneo t1 = new Torneo("T1", partecipanti);
+		t1.setDescrizione("Calcio a 5, una partita a settimana");
+		t1.setMontepremi((long)20);
 		
 		List<Squadra> newPartecipanti = new ArrayList<>();
 		newPartecipanti.addAll(partecipanti);
@@ -56,6 +58,8 @@ public class NopeEventsApplication implements CommandLineRunner {
 		newPartecipanti.add(F);
 		
 		Torneo t2 = new Torneo("T2", newPartecipanti);
+		t2.setDescrizione("Calcio a 7, due partite a settimana");
+		t2.setMontepremi((long)20);
 		
 		Partita p = t1.getPartite().get(0);
 		p.setGolCasa((long)2);

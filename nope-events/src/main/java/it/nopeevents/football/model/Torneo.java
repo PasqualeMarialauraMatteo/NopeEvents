@@ -158,6 +158,7 @@ public class Torneo {
 		for(j = 0; j < l1.size(); j++) {
 			Squadra s1, s2;
 			
+			// Per non avere una squadra che gioca sempre in casa o sempre in trasferta
 			if(giornata%2 == 1) {
 				s1 = l1.get(j);
 				s2 = l2.get(j);
@@ -184,7 +185,7 @@ public class Torneo {
 		posOspt.registerEsito(golTrasferta,golCasa);
 	}
 	
-	private PosizioneTorneo findPosizioneSquadra(Squadra s) {
+	public PosizioneTorneo findPosizioneSquadra(Squadra s) {
 		for(PosizioneTorneo pt: this.getClassifica()) {
 			if(pt.getSquadra().equals(s)) return pt;
 		}

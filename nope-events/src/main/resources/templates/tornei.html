@@ -16,19 +16,25 @@
 			<div class="nav-links">
 				<ul>
 					<li><a href="/">HOME</a></li>
-					<li><a th:href="@{/tornei}">TORNEI</a></li>
+					<li><a href="/default">TORNEI</a></li>
 				</ul>
 			</div>
 		</nav>
-		<div class="text-box">
-			<h1>Nope Events</h1>
+		<div class="text-box-2">
+			<h4>I nostri Tornei</h4>
+			<ul>
+				<li th:each="torneo : ${tornei}">
+					<p
+						th:text="${torneo.nome} + '. ' + ${torneo.descrizione} + 
+								'. Montepremi: ' + ${torneo.montepremi} + ' euro.'">
+						Torneo</p>
+					<p>Squadre partecipanti:</p> 
+					<ul th:each="squadra : ${torneo.squadrePartecipanti}"> 
+					<li th:text="${squadra.nome}">Squadra</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
-	</section>
-	<section class="about-us">
-	<div class="text-box">
-		<h1>Su di noi:</h1>
-		<p>bla bla bla</p>
-	</div>
 	</section>
 	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
 </body>
