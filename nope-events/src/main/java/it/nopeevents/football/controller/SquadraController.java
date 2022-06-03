@@ -35,6 +35,9 @@ public class SquadraController {
 		if(!bindingResults.hasErrors()) {
 			squadraService.save(squadra);
 			model.addAttribute("squadra", squadra);
+			Torneo t = squadra.getTornei().get(0);
+			t.getSquadrePartecipanti().add(squadra);
+			torneoService.save(t);
 			return "redirect:/admin/squadraForm";
 		}
 		List<Torneo> listTornei = torneoService.findAll();
