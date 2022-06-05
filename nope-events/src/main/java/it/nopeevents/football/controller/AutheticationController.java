@@ -28,7 +28,24 @@ public final class AutheticationController {
 	@Autowired
 	private CredentialsValidator credentialsValidator;
 	
-	@GetMapping("/admin")
+	@GetMapping(value = "/register") 
+	public String showRegisterForm (Model model) {
+		model.addAttribute("user", new User());
+		model.addAttribute("credentials", new Credentials());
+		return "registerUser";
+	}
+	
+	@GetMapping(value = "/login") 
+	public String showLoginForm (Model model) {
+		return "loginForm";
+	}
+	
+	@GetMapping(value = "/logout") 
+	public String logout(Model model) {
+		return "index";
+	}
+	
+	@GetMapping(value = "/default")
     public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
@@ -38,24 +55,7 @@ public final class AutheticationController {
         return "index";
     }
 	
-	@GetMapping("/register") 
-	public String showRegisterForm (Model model) {
-		model.addAttribute("user", new User());
-		model.addAttribute("credentials", new Credentials());
-		return "registerUser";
-	}
-	
-	@GetMapping("/login") 
-	public String showLoginForm (Model model) {
-		return "loginForm";
-	}
-	
-	@GetMapping("/logout") 
-	public String logout(Model model) {
-		return "index";
-	}
-	
-    @PostMapping( "/register")
+    @PostMapping(value = "/register")
     public String registerUser(@ModelAttribute("user") User user,
                  BindingResult userBindingResult,
                  @ModelAttribute("credentials") Credentials credentials,

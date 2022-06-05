@@ -2,19 +2,19 @@ package it.nopeevents.football.auth;
 
 import static it.nopeevents.football.model.Credentials.ADMIN_ROLE;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -31,11 +31,11 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // authorization paragraph: qui definiamo chi può accedere a cosa
                 .authorizeRequests()
                 // chiunque (autenticato o no) può accedere a queste pagine
-                .antMatchers(HttpMethod.GET, "/", "/index", "/register", "/login", "/tornei", "/css/**", "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/index","/login", "/register", "/tornei", "/css/**", "/images/**").permitAll()
                 // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login
                 .antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
-                .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 // tutti gli utenti autenticati possono accere alle pagine rimanenti 
                 .anyRequest().authenticated()
@@ -47,7 +47,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // NOTA: Spring gestisce il post di login automaticamente
                 .loginPage("/login")
                 // se il login ha successo, si viene rediretti al path /default
-                .defaultSuccessUrl("/admin")
+                .defaultSuccessUrl("/default")
 
                 // logout paragraph: qui definiamo il logout
                 .and().logout()
