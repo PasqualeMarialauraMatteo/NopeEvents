@@ -30,6 +30,8 @@ public class Torneo {
 	private String descrizione;
 
 	private Long montepremi;
+	
+	private boolean iscrizioneAperta;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInizio;
@@ -49,10 +51,18 @@ public class Torneo {
 		this.partite = new ArrayList<>();
 		this.classifica = new ArrayList<>();
 		this.setCalendario();
+		this.iscrizioneAperta=true;
 	}
 
 	public Torneo() {
-		// TODO Auto-generated constructor stub
+		this.iscrizioneAperta=true;
+	}
+	
+	//una squadra non potrà più essere iscritta a questo torneo
+	//e il calendario viene generato
+	public void terminaIscrizione() {
+		this.setIscrizioneAperta(false);
+		this.setCalendario();
 	}
 
 	public Long getId() {
@@ -192,4 +202,14 @@ public class Torneo {
 		
 		return null;
 	}
+
+	public boolean isIscrizioneAperta() {
+		return iscrizioneAperta;
+	}
+
+	public void setIscrizioneAperta(boolean iscrizioneAperta) {
+		this.iscrizioneAperta = iscrizioneAperta;
+	}
+	
+	
 }

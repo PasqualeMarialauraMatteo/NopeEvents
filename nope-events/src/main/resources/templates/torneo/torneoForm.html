@@ -19,10 +19,13 @@
 				</ul>
 			</div>
 		</nav>
+
 		<div class="text-box">
-			<form th:action="@{/admin/torneoForm}" method="post" th:object="${torneo}">
+			<form th:action="@{/admin/torneoForm}" method="post"
+				th:object="${torneo}">
 				<div th:if="${#fields.hasGlobalErrors()}">
-					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore globale</p>
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore
+						globale</p>
 				</div>
 				<div>
 					nome: <input type="text" th:field="*{nome}" />
@@ -30,22 +33,36 @@
 				</div>
 				<div>
 					descrizione: <input type="text" th:field="*{descrizione}" />
-					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
+					<div th:if="${#fields.hasErrors('descrizione')}"
+						th:errors="*{descrizione}"></div>
 				</div>
 				<div>
 					montepremi: <input type="text" th:field="*{montepremi}" />
-					<div th:if="${#fields.hasErrors('montepremi')}" th:errors="*{montepremi}"></div>
+					<div th:if="${#fields.hasErrors('montepremi')}"
+						th:errors="*{montepremi}"></div>
 				</div>
 				<div>
-					data di inizio: <input type="date" th:value="*{dataInizio}" th:field="*{dataInizio}"/>
-					<div th:if="${#fields.hasErrors('dataInizio')}" th:errors="*{dataInizio}"></div>
+					data di inizio: <input type="date" th:value="*{dataInizio}"
+						th:field="*{dataInizio}" />
+					<div th:if="${#fields.hasErrors('dataInizio')}"
+						th:errors="*{dataInizio}"></div>
 				</div>
 				<div>
-					<button type="submit" >
-					Conferma
-					</button>
+					<button type="submit">Conferma</button>
 				</div>
 			</form>
+		</div>
+
+		<div class="text-box-el">
+			<h4>I nostri Tornei</h4>
+			<ul>
+				<li th:each="torneo : ${tornei}">
+					<p
+						th:text="${torneo.nome} + '. ' + ${torneo.descrizione}">
+						Torneo</p>
+						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/chiudiIscrizione' +  '/' + ${torneo.id}}"><button>Chiudi iscrizione</button></a>
+				</li>
+			</ul>
 		</div>
 	</section>
 	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>

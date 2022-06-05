@@ -25,6 +25,10 @@ public class PosizioneTorneo {
 	private Long differenzaReti;
 	
 	private Long partiteGiocate;
+	
+	public PosizioneTorneo() {
+	
+	}
 
 	public PosizioneTorneo(Torneo torneo, Squadra squadra) {
 		this.torneo = torneo;

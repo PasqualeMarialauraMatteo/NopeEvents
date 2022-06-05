@@ -55,7 +55,7 @@
 					<div>
 						Tornei:
 						<th:block th:each="torneo : ${listTornei} ">
-							<input type="checkbox" th:field="*{tornei}"
+							<input type="checkbox" th:field="*{tornei}" th:if="${torneo.isIscrizioneAperta()}"
 								th:text="${torneo.nome}" th:value="${torneo.id}">
 						</th:block>
 						<div>

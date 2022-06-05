@@ -61,6 +61,16 @@ nav img{
 	margin: auto;
 }
 
+.text-box-el{
+	width: 45%;
+	color:white;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	float:left;
+}
+
 .text-box{
 	width: 45%;
 	color:white;
