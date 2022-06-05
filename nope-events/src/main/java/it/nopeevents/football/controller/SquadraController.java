@@ -19,13 +19,13 @@ import it.nopeevents.football.validator.SquadraValidator;
 
 @Controller
 public class SquadraController {
-	
+
 	@Autowired
 	private SquadraService squadraService;
-	
+
 	@Autowired
 	private TorneoService torneoService;
-	
+
 	@Autowired
 	private SquadraValidator squadraValidator;
 
@@ -35,9 +35,11 @@ public class SquadraController {
 		if(!bindingResults.hasErrors()) {
 			squadraService.save(squadra);
 			model.addAttribute("squadra", squadra);
-			Torneo t = squadra.getTornei().get(0);
-			t.getSquadrePartecipanti().add(squadra);
-			torneoService.save(t);
+			for(int i= 0; i < squadra.getTornei().size() ; i++ ) {
+				Torneo t = squadra.getTornei().get(i);
+				t.getSquadrePartecipanti().add(squadra);
+				torneoService.save(t);
+			}
 			return "redirect:/admin/squadraForm";
 		}
 		List<Torneo> listTornei = torneoService.findAll();

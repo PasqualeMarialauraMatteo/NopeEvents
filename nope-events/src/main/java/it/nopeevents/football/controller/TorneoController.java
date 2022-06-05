@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,12 +36,14 @@ public class TorneoController {
 			model.addAttribute("torneo", torneo);
 			return "redirect:/admin/torneoForm";
 		}
+		model.addAttribute("tornei", torneoService.findAll());
 		return "torneo/torneoForm.html";
 	}
 	
 	@GetMapping("/admin/torneoForm")
 	public String getTorneoForm(Model model) {
 		model.addAttribute("torneo", new Torneo());
+		model.addAttribute("tornei", torneoService.findAll());
 		return "torneo/torneoForm.html";
 	}
 	
@@ -48,6 +51,14 @@ public class TorneoController {
 	public String showTornei(Model model) {
 		model.addAttribute("tornei", torneoService.findAll());
 		return "torneo/tornei.html";
+	}
+	
+	@GetMapping("/admin/chiudiIscrizione/{id}")
+	public String chiudiIscrizioneTorneo(@PathVariable("id") Long id, Model model) {
+		Torneo t = torneoService.findById(id);
+		t.terminaIscrizione();
+		torneoService.save(t);
+		return  "redirect:/admin/torneoForm";
 	}
 	
 }
