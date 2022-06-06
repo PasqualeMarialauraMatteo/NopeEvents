@@ -49,7 +49,7 @@ public class SquadraController {
 
 
 	@GetMapping("/admin/squadraForm")
-	public String getPiatti(Model model) {
+	public String getSquadre(Model model) {
 		model.addAttribute("squadra", new Squadra());
 		List<Torneo> listTornei = torneoService.findAll();
 		model.addAttribute("listTornei", listTornei);

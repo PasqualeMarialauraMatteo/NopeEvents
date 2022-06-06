@@ -36,7 +36,7 @@ public class Torneo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInizio;
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "tornei")
 	private List<Squadra> squadrePartecipanti;
 
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
