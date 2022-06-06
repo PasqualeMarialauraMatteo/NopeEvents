@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.nopeevents.football.model.Partita;
+import it.nopeevents.football.model.PosizioneTorneo;
 import it.nopeevents.football.model.Torneo;
 import it.nopeevents.football.repository.TorneoRepository;
 
@@ -15,6 +17,9 @@ import it.nopeevents.football.repository.TorneoRepository;
 public class TorneoService {
 
 	@Autowired private TorneoRepository torneoRepository;
+	
+	@Autowired private PosizioneService posizioneService;
+	@Autowired private PartitaService partitaService;
 	
 	@Transactional
 	public void save(Torneo torneo) {
@@ -42,5 +47,15 @@ public class TorneoService {
 	@Transactional
 	public void remove(Long id) {
 		torneoRepository.deleteById(id);
+	}
+	
+	public void saveAll(Torneo torneo) {
+		for(PosizioneTorneo pos: torneo.getClassifica())
+			posizioneService.save(pos);
+		
+		for(Partita par: torneo.getPartite())
+			partitaService.save(par);
+		
+		save(torneo);
 	}
 }

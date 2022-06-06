@@ -55,9 +55,9 @@ public class TorneoController {
 	
 	@GetMapping("/admin/chiudiIscrizione/{id}")
 	public String chiudiIscrizioneTorneo(@PathVariable("id") Long id, Model model) {
-		Torneo t = torneoService.findById(id);
-		t.terminaIscrizione();
-		torneoService.save(t);
+		Torneo torneo = torneoService.findById(id);
+		torneo.terminaIscrizione();
+		torneoService.saveAll(torneo);
 		return  "redirect:/admin/torneoForm";
 	}
 	

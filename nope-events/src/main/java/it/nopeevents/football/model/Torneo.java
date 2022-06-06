@@ -58,8 +58,8 @@ public class Torneo {
 		this.iscrizioneAperta=true;
 	}
 	
-	//una squadra non potrà più essere iscritta a questo torneo
-	//e il calendario viene generato
+	// una squadra non potrà più essere iscritta a questo torneo
+	// e il calendario viene generato
 	public void terminaIscrizione() {
 		this.setIscrizioneAperta(false);
 		this.setCalendario();

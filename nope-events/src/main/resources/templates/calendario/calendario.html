@@ -37,9 +37,9 @@
 			<tbody>
 				<tr th:each="partita: ${calendario}">
 					<td th:text="${partita.giornata}"></td>
-					<td th:text="${partita.casa}"></td>
-					<td th:text="${partita.ospite}"></td>
-					<td th:text="${partita.golCasa} + ' - ' + ${partita.golTrasferta}"></td>
+					<td th:text="${partita.casa.nome}"></td>
+					<td th:text="${partita.ospite.nome}"></td>
+					<td th:if="${partita.giocata}" th:text="${partita.golCasa} + ' - ' + ${partita.golTrasferta}"></td>
 				</tr>
 			</tbody>
 

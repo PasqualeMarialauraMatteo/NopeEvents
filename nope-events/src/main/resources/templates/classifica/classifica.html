@@ -36,7 +36,7 @@
 
 			<tbody>
 				<tr th:each="posizione: ${classifica}">
-					<td th:text="${posizione.squadra}"></td>
+					<td th:text="${posizione.squadra.nome}"></td>
 					<td th:text="${posizione.partiteGiocate}"></td>
 					<td th:text="${posizione.differenzaReti}"></td>
 					<td th:text="${posizione.punti}"></td>
