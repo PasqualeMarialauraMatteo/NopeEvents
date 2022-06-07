@@ -30,7 +30,7 @@ public class SquadraController {
 	private SquadraValidator squadraValidator;
 
 	@PostMapping("/admin/squadraForm")
-	public String addPartita(@Valid @ModelAttribute("squadra") Squadra squadra, BindingResult bindingResults, Model model) {
+	public String addSquadra(@Valid @ModelAttribute("squadra") Squadra squadra, BindingResult bindingResults, Model model) {
 		squadraValidator.validate(squadra,  bindingResults);
 		if(!bindingResults.hasErrors()) {
 			squadraService.save(squadra);
@@ -49,7 +49,7 @@ public class SquadraController {
 
 
 	@GetMapping("/admin/squadraForm")
-	public String getPiatti(Model model) {
+	public String getSquadre(Model model) {
 		model.addAttribute("squadra", new Squadra());
 		List<Torneo> listTornei = torneoService.findAll();
 		model.addAttribute("listTornei", listTornei);
