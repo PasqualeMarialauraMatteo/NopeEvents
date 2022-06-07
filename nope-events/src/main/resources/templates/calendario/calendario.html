@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<title>Calendario</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+					<li><a href="/">HOME</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box-2">
+			<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Giornata</th>
+					<th>Casa</th>
+					<th>Trasferta</th>
+					<th>Risultato</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="partita: ${calendario}">
+					<td th:text="${partita.giornata}"></td>
+					<td th:text="${partita.casa.nome}"></td>
+					<td th:text="${partita.ospite.nome}"></td>
+					<td th:if="${partita.giocata}" th:text="${partita.golCasa} + ' - ' + ${partita.golTrasferta}"></td>
+				</tr>
+			</tbody>
+
+		</table>
+		</div>
+	</section>
+	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
+</body>
+</html>

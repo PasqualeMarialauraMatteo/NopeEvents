@@ -15,9 +15,10 @@
 			<img src="images/logoNE.png">
 			<div class="nav-links">
 				<ul>
-					<li><a href="/admin">HOME</a></li>
-					<li><a href="/admin/torneoForm">TORNEO</a></li>
-					<li><a href="/admin/squadraForm">SQUADRA</a></li>
+					<li><a href="/default">HOME</a></li>
+					<li><a th:href=@{/admin/torneoForm}>TORNEO</a></li>
+					<li><a th:href=@{/admin/squadraForm}>SQUADRA</a></li>
+					<li><a th:href=@{/logout}>LOGOUT</a></li>
 				</ul>
 			</div>
 		</nav>

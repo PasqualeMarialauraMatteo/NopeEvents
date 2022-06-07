@@ -1,5 +1,7 @@
 package it.nopeevents.football.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,10 @@ public class PartitaService {
 	@Transactional
 	public void save(Partita partita) {
 		partitaRepository.save(partita);
+	}
+
+	public List<Partita> findByTorneo(Long torneo_id) {
+		return partitaRepository.findByTorneoIdOrderByGiornataAsc(torneo_id);
 	}
 
 }

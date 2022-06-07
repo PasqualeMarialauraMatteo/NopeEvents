@@ -1,5 +1,8 @@
 package it.nopeevents.football.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +19,17 @@ public class PosizioneService {
 	@Transactional
 	public void save(PosizioneTorneo posizione) {
 		posizioneRepository.save(posizione);
+	}
+	
+	public List<PosizioneTorneo> findAll() {
+		Iterable<PosizioneTorneo> all = posizioneRepository.findAll();
+		List<PosizioneTorneo> output = new ArrayList<>();
+		
+		for(PosizioneTorneo p: all) output.add(p);
+		return output;
+	}
+
+	public List<PosizioneTorneo> findAllByTorneo(Long torneo_id) {
+		return posizioneRepository.findByTorneoIdOrderByPuntiDescPartiteGiocateAscDifferenzaRetiDesc(torneo_id);
 	}
 }
