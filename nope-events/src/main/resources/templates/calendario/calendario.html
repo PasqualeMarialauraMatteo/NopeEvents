@@ -25,25 +25,32 @@
 		</nav>
 		<div class="text-box-2">
 			<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>Giornata</th>
-					<th>Casa</th>
-					<th>Trasferta</th>
-					<th>Risultato</th>
-				</tr>
-			</thead>
+				<thead class="table-dark">
+					<tr>
+						<th>Giornata</th>
+						<th>Casa</th>
+						<th>Trasferta</th>
+						<th>Risultato</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr th:each="partita: ${calendario}">
-					<td th:text="${partita.giornata}"></td>
-					<td th:text="${partita.casa.nome}"></td>
-					<td th:text="${partita.ospite.nome}"></td>
-					<td th:if="${partita.giocata}" th:text="${partita.golCasa} + ' - ' + ${partita.golTrasferta}"></td>
-				</tr>
-			</tbody>
+				<tbody>
+					<tr th:each="partita: ${calendario}">
+						<td th:text="${partita.giornata}"></td>
+						<td th:text="${partita.casa.nome}"></td>
+						<td th:text="${partita.ospite.nome}"></td>
+						<td>
+							<div th:switch="${partita.giocata}">
+								<p th:case="${true}" th:text="${partita.golCasa} + ' - ' + ${partita.golTrasferta}">Giocata</p>
+								<p th:case="*">Da giocare</p>
+							</div>
+						</td>
 
-		</table>
+
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
 	</section>
 	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
