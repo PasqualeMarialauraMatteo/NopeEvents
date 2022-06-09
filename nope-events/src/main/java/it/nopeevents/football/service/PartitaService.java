@@ -19,6 +19,10 @@ public class PartitaService {
 	public void save(Partita partita) {
 		partitaRepository.save(partita);
 	}
+	
+	public Partita findById(Long id) {
+		return partitaRepository.findById(id).get();
+	}
 
 	public List<Partita> findByTorneo(Long torneo_id) {
 		return partitaRepository.findByTorneoIdOrderByGiornataAsc(torneo_id);

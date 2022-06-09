@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<title>Calendario</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../../images/logoNE.png">
+		</nav>
+		<div class="text-box">
+		<form th:action="@{/admin/putRisultato/{id}(id=${partita.id})}"
+				th:object="${partita}" method="POST">
+			
+			<div>
+			<a th:text="${partita.casa.nome}"/>
+			<input 
+				type="number" 
+				th:field="*{golCasa}"/>
+			</div>
+			<div>
+			<a th:text="${partita.ospite.nome}"/>
+			<input 
+				type="number" 
+				th:field="*{golTrasferta}"/>
+			</div>	
+			
+			<div>
+				<button type="submit">Conferma</button>
+			</div>
+			
+		</form>
+	</div>
+	</section>
+</body>
+</html>
