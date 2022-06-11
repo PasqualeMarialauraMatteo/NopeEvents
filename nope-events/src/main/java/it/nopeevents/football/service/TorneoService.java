@@ -25,6 +25,7 @@ public class TorneoService {
 	public void save(Torneo torneo) {
 		torneoRepository.save(torneo);
 	}
+	
 	@Transactional
 	public Torneo findById(Long id) {
 		return torneoRepository.findById(id).get();

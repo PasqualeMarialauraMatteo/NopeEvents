@@ -21,6 +21,7 @@ import it.nopeevents.football.validator.TorneoValidator;
 
 @Controller
 public class TorneoController {
+	
 	@Autowired
 	private TorneoService torneoService;
 
@@ -59,6 +60,5 @@ public class TorneoController {
 		torneo.terminaIscrizione();
 		torneoService.saveAll(torneo);
 		return  "redirect:/admin/torneoForm";
-	}
-	
+	}	
 }

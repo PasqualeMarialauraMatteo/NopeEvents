@@ -61,6 +61,7 @@
 						th:text="${torneo.nome} + '. ' + ${torneo.descrizione}">
 						Torneo</p>
 						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/chiudiIscrizione' +  '/' + ${torneo.id}}"><button>Chiudi iscrizione</button></a>
+						<a th:if="${!torneo.isIscrizioneAperta()}" th:href="@{'/admin/gestisciPartite' +  '/' + ${torneo.id}}"><button>Gestisci partite</button></a>
 				</li>
 			</ul>
 		</div>
