@@ -1,5 +1,7 @@
 package it.nopeevents.football.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import it.nopeevents.football.model.Squadra;

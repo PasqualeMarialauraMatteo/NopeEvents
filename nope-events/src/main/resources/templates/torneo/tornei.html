@@ -30,6 +30,7 @@
 					<a th:if="${!torneo.isIscrizioneAperta()}" th:href="@{/classifica/{id}(id=${torneo.id})}">Classifica</a>
 					<a th:if="${!torneo.isIscrizioneAperta()}" th:href="@{/calendario/{id}(id=${torneo.id})}">Calendario</a>
 					<a th:if="${torneo.isIscrizioneAperta()}">Iscrizioni aperte</a>
+					<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{/listaSquadre/{id}(id=${torneo.id})}">Vedi squadre attualmente iscritte</a>
 					</ul>
 				</li>
 			</ul>

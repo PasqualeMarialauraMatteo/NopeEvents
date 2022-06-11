@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<title>Home</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+					<li><a href="/">HOME</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box-2">
+			<h4>Ecco le squadre attualmente iscritte:</h4>
+			<ul>
+				<li th:each="squadra : ${squadre}">
+					<p th:text="${squadra.nome}">
+				</li>
+			</ul>
+		</div>
+	</section>
+	<footer> | Via Appia Antica 12, Roma (RM) | 0612345678 |</footer>
+</body>
+</html>

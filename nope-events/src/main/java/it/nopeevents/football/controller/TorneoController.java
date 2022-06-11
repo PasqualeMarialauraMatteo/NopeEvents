@@ -1,6 +1,7 @@
 package it.nopeevents.football.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.nopeevents.football.model.Squadra;
 import it.nopeevents.football.model.Torneo;
+import it.nopeevents.football.service.SquadraService;
 import it.nopeevents.football.service.TorneoService;
 import it.nopeevents.football.validator.TorneoValidator;
 
@@ -24,6 +27,9 @@ public class TorneoController {
 	
 	@Autowired
 	private TorneoService torneoService;
+	
+	@Autowired
+	private SquadraService squadraService;
 
 	@Autowired
 	private TorneoValidator torneoValidator;
@@ -48,6 +54,21 @@ public class TorneoController {
 		return "torneo/torneoForm.html";
 	}
 	
+	@GetMapping("/admin/cancellaTorneo/{id}")
+	public String cancellaTorneo(@PathVariable("id") Long id, Model model) {
+		Torneo t = torneoService.findById(id);
+		//Elimino le squadre partecipanti al torneo se e solo se
+		//sono iscritte solo a quel torneo
+		for(Squadra s : t.getSquadrePartecipanti()) {
+			s.getTornei().remove(t);
+			if(s.getTornei().size() < 1) {
+				squadraService.remove(s.getId());
+			}
+		}
+		torneoService.remove(id);
+		return "redirect:/admin/torneoForm";
+	}
+	
 	@GetMapping("/tornei")
 	public String showTornei(Model model) {
 		model.addAttribute("tornei", torneoService.findAll());
@@ -61,4 +82,11 @@ public class TorneoController {
 		torneoService.saveAll(torneo);
 		return  "redirect:/admin/torneoForm";
 	}	
+	
+	@GetMapping("/listaSquadre/{id}")
+	public String showSquadreTorneo(@PathVariable("id") Long id, Model model) {
+		List<Squadra> squadre = torneoService.findById(id).getSquadrePartecipanti();
+		model.addAttribute("squadre", squadre);
+		return "squadra/squadrePerTorneo";
+	}
 }
