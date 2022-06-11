@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Squadra {
@@ -23,6 +24,7 @@ public class Squadra {
 	
 	private String email;
 	
+	@NotEmpty
 	@ManyToMany
 	private List<Torneo> tornei;
 	

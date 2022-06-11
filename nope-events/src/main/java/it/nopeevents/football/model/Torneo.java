@@ -13,7 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,6 +36,8 @@ public class Torneo {
 	
 	private boolean iscrizioneAperta;
 
+	@FutureOrPresent
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInizio;
 
@@ -210,6 +215,5 @@ public class Torneo {
 	public void setIscrizioneAperta(boolean iscrizioneAperta) {
 		this.iscrizioneAperta = iscrizioneAperta;
 	}
-	
 	
 }
