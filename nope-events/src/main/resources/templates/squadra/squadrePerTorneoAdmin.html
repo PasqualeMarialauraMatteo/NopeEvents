@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+	rel="stylesheet">
+<title>Home</title>
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<img src="../../images/logoNE.png">
+			<div class="nav-links">
+				<ul>
+				<li><a th:href="@{/admin/torneoForm}">BACK</a></li>
+					<li><a href="/default">HOME</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="text-box-2">
+			<h4>Ecco le squadre attualmente iscritte:</h4>
+			<ul>
+				<li th:each="squadra : ${torneo.squadrePartecipanti}">
+					<p th:text="${squadra.nome}">Squadra</p>
+					<a th:href="@{'/admin/squadreTorneo' +  '/' + ${torneo.id} +  '/' + ${squadra.id}}"> <button>Rimuovi</button></a>
+				</li>
+			</ul>
+		</div>
+	</section>
+</body>
+</html>

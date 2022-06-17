@@ -89,4 +89,27 @@ public class TorneoController {
 		model.addAttribute("squadre", squadre);
 		return "squadra/squadrePerTorneo";
 	}
+	
+	@GetMapping("/admin/squadreTorneo/{id}")
+	public String vediSquadreTorneo(@PathVariable("id") Long id, Model model){
+		model.addAttribute("torneo", torneoService.findById(id));
+		return "squadra/squadrePerTorneoAdmin";
+	}
+	
+	@GetMapping("/admin/squadreTorneo/{id}/{id1}")
+	public String cancellaSquadraPerTorneo(@PathVariable("id") Long idTorneo,@PathVariable("id1") Long id, Model model){
+		Torneo torneo = torneoService.findById(idTorneo);
+		Squadra squadra=squadraService.findById(id);
+		torneo.getSquadrePartecipanti().remove(squadra);
+		torneoService.save(torneo);
+		squadra.getTornei().remove(torneo);
+		if(squadra.getTornei().size() < 1) {
+			squadraService.remove(squadra.getId());
+		}
+		else {
+			squadraService.save(squadra);
+		}
+		return "redirect:/admin/squadreTorneo/{id}";
+	}
+
 }
