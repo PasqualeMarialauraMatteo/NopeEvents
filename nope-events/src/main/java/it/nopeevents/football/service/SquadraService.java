@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.nopeevents.football.model.Partita;
 import it.nopeevents.football.model.Squadra;
 import it.nopeevents.football.repository.SquadraRepository;
 
