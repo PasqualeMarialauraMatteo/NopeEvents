@@ -208,10 +208,10 @@ public class Torneo {
 	}
 
 	public boolean isIscrizioneAperta() {
-		return iscrizioneAperta && iscrizioniChiudibili();
+		return iscrizioneAperta;
 	}
 
-	private boolean iscrizioniChiudibili() {
+	public boolean iscrizioniChiudibili() {
 		int n  = this.getNumeroSquadreIscritte();
 		return ((n != 0) && (n%2 == 0));
 	}

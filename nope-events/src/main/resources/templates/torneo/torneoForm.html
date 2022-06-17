@@ -58,7 +58,7 @@
 					<p
 						th:text="${torneo.nome} + '. ' + ${torneo.descrizione}">
 						Torneo</p>
-						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/chiudiIscrizione' +  '/' + ${torneo.id}}"><button>Chiudi iscrizione</button></a>
+						<a th:if="${torneo.isIscrizioneAperta()} and ${torneo.iscrizioniChiudibili()}" th:href="@{'/admin/chiudiIscrizione' +  '/' + ${torneo.id}}"><button>Chiudi iscrizione</button></a>
 						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/cancellaTorneo' +  '/' + ${torneo.id}}"><button>Cancella il torneo</button></a>
 						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/squadreTorneo' +  '/' + ${torneo.id}}"><button>Rimuovi squadre</button></a>
 						<a th:if="${!torneo.isIscrizioneAperta()}" th:href="@{'/admin/gestisciPartite' +  '/' + ${torneo.id}}"><button>Gestisci partite</button></a>
