@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -12,7 +12,7 @@
 <body>
 	<section class="header">
 		<nav>
-			<img src="../images/logoNE.png">
+			<img src="../../images/logoNE.png">
 			<div class="nav-links">
 				<ul>
 					<li><a href="/default">HOME</a></li>
@@ -20,7 +20,7 @@
 			</div>
 		</nav>
 		<div class="text-box">
-			<form th:action="@{/admin/torneoForm}" method="post"
+			<form th:action="@{'/admin/modificaTorneo' + '/' + ${torneo.id}}" method="post"
 				th:object="${torneo}">
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">errore
@@ -50,21 +50,6 @@
 					<button type="submit">Conferma</button>
 				</div>
 			</form>
-		</div>
-		<div class="text-box-el">
-			<h4>I nostri Tornei</h4>
-			<ul>
-				<li th:each="torneo : ${tornei}">
-					<p
-						th:text="${torneo.nome} + '. ' + ${torneo.descrizione}">
-						Torneo</p>
-						<a th:if="${torneo.isIscrizioneAperta()} and ${torneo.iscrizioniChiudibili()}" th:href="@{'/admin/chiudiIscrizione' +  '/' + ${torneo.id}}"><button>Chiudi iscrizione</button></a>
-						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/cancellaTorneo' +  '/' + ${torneo.id}}"><button>Cancella il torneo</button></a>
-						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/squadreTorneo' +  '/' + ${torneo.id}}"><button>Rimuovi squadre</button></a>
-						<a th:if="${torneo.isIscrizioneAperta()}" th:href="@{'/admin/modificaTorneo' +  '/' + ${torneo.id}}"><button>Modifica dati</button></a>
-						<a th:if="${!torneo.isIscrizioneAperta()}" th:href="@{'/admin/gestisciPartite' +  '/' + ${torneo.id}}"><button>Gestisci partite</button></a>
-				</li>
-			</ul>
 		</div>
 	</section>
 </body>

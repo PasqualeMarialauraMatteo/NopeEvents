@@ -111,5 +111,22 @@ public class TorneoController {
 		}
 		return "redirect:/admin/squadreTorneo/{id}";
 	}
+	
+	@GetMapping("/admin/modificaTorneo/{id}")
+	public String modificaTorneo(@PathVariable("id") Long id, Model model){
+		model.addAttribute("torneo", torneoService.findById(id));
+		return "torneo/modificaTorneo.html";
+	}
+	
+	@PostMapping("/admin/modificaTorneo/{id}")
+	public String modificaTorneoForm(@Valid @ModelAttribute("torneo") Torneo torneo, BindingResult bindingResults, Model model,@RequestParam("dataInizio") 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
+		torneoValidator.validate(torneo,  bindingResults);
+		if(!bindingResults.hasErrors()) {
+			torneoService.save(torneo);
+			return "redirect:/admin/torneoForm";
+		}
+		return "torneo/modificaTorneo.html";
+	}
 
 }
