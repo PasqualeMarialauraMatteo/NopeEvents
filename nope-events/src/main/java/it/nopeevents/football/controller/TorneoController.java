@@ -71,7 +71,9 @@ public class TorneoController {
 	
 	@GetMapping("/tornei")
 	public String showTornei(Model model) {
-		model.addAttribute("tornei", torneoService.findAll());
+		List<Torneo> tornei = torneoService.findAll();
+		
+		model.addAttribute("tornei", tornei);
 		return "torneo/tornei.html";
 	}
 	

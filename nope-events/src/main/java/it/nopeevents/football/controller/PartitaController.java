@@ -1,5 +1,7 @@
 package it.nopeevents.football.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +19,28 @@ import it.nopeevents.football.validator.PartitaValidator;
 
 @Controller
 public class PartitaController {
-	
+
 	@Autowired PartitaService partitaService;
-	
+
 	@Autowired PartitaValidator partitaValidator;
-	
+
 	@GetMapping("/calendario/{id}")
 	public String showCalendario(@PathVariable Long id, Model model) {
-		model.addAttribute("calendario", partitaService.findByTorneo(id));
-		return "calendario/calendario.html";
+		List<Partita> calendario = partitaService.findByTorneo(id);
+		if(!calendario.isEmpty()) {
+			model.addAttribute("calendario", calendario);
+			return "calendario/calendario.html";
+		}
+		else
+			return "error.html";
 	}
-	
+
 	@GetMapping("/admin/gestisciPartite/{id}")
 	public String gestisciPartite(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("calendario", partitaService.findByTorneo(id));
 		return "calendario/set_partite.html";
 	}
-	
+
 	@GetMapping("/admin/setRisultato/{id}")
 	public String inserisciRisultatoForm(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("partita", partitaService.findById(id));
@@ -52,10 +59,10 @@ public class PartitaController {
 			partita.setGiocata();
 			this.partitaService.save(partita);
 			model.addAttribute("partita", partita);
-			
+
 			return "redirect:/admin/gestisciPartite/" + partita.getTorneo().getId().toString();
 		}
-		
+
 		else
 			return "calendario/set_risultato.html";
 	}
