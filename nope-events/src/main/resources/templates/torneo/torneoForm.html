@@ -19,7 +19,7 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="text-box">
+		<div class="text-box-torneo">
 		<h2>Inserimento nuovo torneo:</h2>
 			<form th:action="@{/admin/torneoForm}" method="post"
 				th:object="${torneo}">
@@ -52,7 +52,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="text-box-el">
+		<div class="text-box-el-torneo">
 			<h4>I nostri Tornei</h4>
 			<ul>
 				<li th:each="torneo : ${tornei}">
