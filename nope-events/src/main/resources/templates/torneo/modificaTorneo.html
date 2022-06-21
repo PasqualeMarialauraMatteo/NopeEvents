@@ -20,6 +20,7 @@
 			</div>
 		</nav>
 		<div class="text-box">
+		<h2>Modifica del torneo:</h2>
 			<form th:action="@{'/admin/modificaTorneo' + '/' + ${torneo.id}}" method="post"
 				th:object="${torneo}">
 				<div th:if="${#fields.hasGlobalErrors()}">
